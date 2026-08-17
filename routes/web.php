@@ -9,3 +9,4 @@ Route::get( uri:"/", action: [SiteController::class, 'index']);
 
 //LOGIN
 Route::get( uri:"/login", action: [LoginController::class, 'index']);
+Route::post( uri:"/login", action: [LoginController::class, 'authenticate']);
