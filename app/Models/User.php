@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
 
@@ -48,5 +49,17 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    //um usuario pode ter muitos hábitos
+    public function habits(): HasMany
+    {
+        return $this->hasMany( related: Habit::class);
+    }
+
+    //um usuario pode ter muitos registros
+    public function habitsLogs(): HasMany
+    {
+        return $this->hasMany( related: HabitLog::class);
     }
 }
