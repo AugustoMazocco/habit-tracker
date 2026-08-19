@@ -19,12 +19,12 @@ class Habit extends Model
     //um hábito pertence a um usuário
     public function user(): BelongsTo
     {
-        return $this->belongsTo( related: User::class);
+        return $this->belongsTo(User::class);
     }
 
     //um habito pode ter muitos registros
     public function habitLogs(): HasMany
     {
-        return $this->hasMany( related: HabitLog::class);
+        return $this->hasMany(HabitLog::class);
     }
 }

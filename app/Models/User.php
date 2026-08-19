@@ -54,12 +54,12 @@ class User extends Authenticatable
     //um usuario pode ter muitos hábitos
     public function habits(): HasMany
     {
-        return $this->hasMany( related: Habit::class);
+        return $this->hasMany(Habit::class);
     }
 
     //um usuario pode ter muitos registros
     public function habitsLogs(): HasMany
     {
-        return $this->hasMany( related: HabitLog::class);
+        return $this->hasMany(HabitLog::class);
     }
 }

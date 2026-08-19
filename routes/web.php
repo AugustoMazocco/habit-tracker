@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HabitController;
 use App\Http\Controllers\RegisterControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
@@ -17,5 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::get( uri:"/dashboard", action: [SiteController::class, 'dashboard'])->name( name: 'site.dashboard');
 
     Route::post( uri:"/logout", action: [LoginController::class, 'logout'])->name( name: 'auth.logout');
+    Route::get( uri: '/dashboard/habits/create', action: [HabitController::class, 'create'])->name( name:'habit.create'); 
+    Route::post( uri:'/dashboard/habits', action: [HabitController::class, 'store'])->name( name: 'habit.store');
 });
 
