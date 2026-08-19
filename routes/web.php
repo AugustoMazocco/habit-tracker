@@ -14,14 +14,7 @@ Route::get( uri:"/cadastro", action: [RegisterControler::class, 'index'])->name(
 Route::post( uri:"/cadastro", action: [RegisterControler::class, 'store'])->name( name: 'auth.register');
 
 Route::middleware('auth')->group(function () {
-
-    Route::get( uri:"/dashboard", action: [SiteController::class, 'dashboard'])->name( name: 'site.dashboard');
-
     Route::post( uri:"/logout", action: [LoginController::class, 'logout'])->name( name: 'auth.logout');
-    Route::get( uri: '/dashboard/habits/create', action: [HabitController::class, 'create'])->name( name:'habit.create'); 
-    Route::post( uri:'/dashboard/habits', action: [HabitController::class, 'store'])->name( name: 'habit.store');
-    Route::delete( uri: 'dashboard/habits/{habit}', action: [HabitController::class, 'destroy'])->name( name: 'habit.destroy');
-    Route::get( uri:"/dashboard/habits/{habit}/edit", action: [HabitController::class, 'edit'])->name( name: 'habit.edit');
-    Route::put( uri:"/dashboard/habits/{habit}", action: [HabitController::class, 'update'])->name( name: 'habit.update');
+    Route::resource( name: '/dashboard/habits', controller: HabitController::class)->except(methods: 'show');
 });
 
