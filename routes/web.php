@@ -7,8 +7,6 @@ use App\Http\Controllers\SiteController;
 
 //SITE
 Route::get( uri:"/", action: [SiteController::class, 'index'])->name( name: 'site.index');
-
-//LOGIN
 Route::get( uri:"/login", action: [LoginController::class, 'index'])->name( name: 'site.login');
 Route::post( uri:"/login", action: [LoginController::class, 'authenticate'])->name( name: 'auth.login');
 Route::get( uri:"/cadastro", action: [RegisterControler::class, 'index'])->name( name: 'site.register');

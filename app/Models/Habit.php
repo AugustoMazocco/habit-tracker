@@ -23,7 +23,7 @@ class Habit extends Model
     }
 
     //um habito pode ter muitos registros
-    public function habitsLogs(): HasMany
+    public function habitLogs(): HasMany
     {
         return $this->hasMany( related: HabitLog::class);
     }
