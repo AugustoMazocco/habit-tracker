@@ -16,11 +16,11 @@ return new class extends Migration
             $table
                 ->foreignIdFor( model: \App\Models\User::class)
                 ->constrained()
-                ->cascadeOnDelete;
+                ->cascadeOnDelete();
             $table
                 ->foreignIdFor( model: \App\Models\Habit::class)
                 ->constrained()
-                ->cascadeOnDelete;
+                ->cascadeOnDelete();
             $table->date( column: 'completed_at');
             $table->timestamps();
 
