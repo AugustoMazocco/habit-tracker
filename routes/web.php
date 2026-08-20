@@ -15,6 +15,7 @@ Route::post( uri:"/cadastro", action: [RegisterControler::class, 'store'])->name
 
 Route::middleware('auth')->group(function () {
     Route::post( uri:"/logout", action: [LoginController::class, 'logout'])->name( name: 'auth.logout');
-    Route::resource( name: '/dashboard/habits', controller: HabitController::class)->except(methods: 'show');
+    Route::resource( name: '/dashboard/habits', controller: HabitController::class)->except(methods: 'show');   
+    Route::get( uri:'dashboard/habits/configurar', action: [HabitController::class, 'settings'])->name( name: 'habits.settings');
 });
 
