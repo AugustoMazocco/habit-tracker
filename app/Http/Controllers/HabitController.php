@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\HabitRequest;
 use App\Models\Habit;
+use App\Models\HabitLog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View as View;
@@ -51,7 +53,7 @@ class HabitController extends Controller
      */
     public function update(HabitRequest $request, Habit $habit)
     {
-        if($habit->user_id != auth()->user()->id){
+        if($habit->user_id != Auth::user()->id){
             abort( code: 403, message:"sai pra lá o pangaré");
         }
         $habit->update($request->all());
@@ -66,7 +68,7 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        if($habit->user_id != auth()->user()->id){
+        if($habit->user_id != Auth::user()->id){
             abort( code: 403, message:"sai pra lá o pangaré");
         }
         
@@ -79,8 +81,37 @@ class HabitController extends Controller
 
     public function settings()
     {
-        $habits = auth()->user()->habits;
+        $habits = Auth::user()->habits;
 
         return view( 'habits.settings', compact('habits'));
+    }
+
+    public function toggle(Habit $habit)
+    {
+        if($habit->user_id != Auth::user()->id){
+            abort( code: 403, message:"sai pra lá o pangaré");
+        }
+
+        $today = Carbon::today()->toDateString();
+
+        $log = HabitLog::query()
+            ->where( 'habit_id', $habit->id)
+            ->where( 'completed_at', $today)
+            ->first();
+
+        if($log){
+            $log->delete();
+            $message = 'Hábito desmarcado';
+        } else {
+            HabitLog::create([
+                'user_id' => Auth::user()->id,
+                'habit_id' => $habit->id,
+                'completed_at' => $today
+            ]);
+            $message = 'Hábito concluído';
+        }
+        return redirect()
+            ->route(route: 'habits.index') 
+            ->with('success', $message);
     }
 }
