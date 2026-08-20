@@ -33,7 +33,7 @@
                                 onchange="document.getElementById('form-{{ $item->id }}').submit()"
                             />
                             <p class="font-bold text-lg">
-                                {{ $item->name}}
+                                {{ $item->name }}
                             </p>
                         </form>
                     </li>

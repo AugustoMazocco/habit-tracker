@@ -6,12 +6,15 @@ use App\Http\Requests\HabitRequest;
 use App\Models\Habit;
 use App\Models\HabitLog;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View as View;
 
 class HabitController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index(): View
     {   
         $habits = Auth::user()->habits()
@@ -47,6 +50,8 @@ class HabitController extends Controller
      */
     public function edit(Habit $habit)
     {
+        $this->authorize('edit', $habit);
+
         return view( 'habits.edit', compact('habit') );
     }
 
@@ -55,9 +60,8 @@ class HabitController extends Controller
      */
     public function update(HabitRequest $request, Habit $habit)
     {
-        if($habit->user_id != Auth::user()->id){
-            abort( code: 403, message:"sai pra lá o pangaré");
-        }
+        $this->authorize('update', $habit);
+
         $habit->update($request->all());
 
         return redirect()
@@ -70,9 +74,7 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        if($habit->user_id != Auth::user()->id){
-            abort( code: 403, message:"sai pra lá o pangaré");
-        }
+        $this->authorize('delete', $habit);
         
         $habit->delete();
 
@@ -90,9 +92,7 @@ class HabitController extends Controller
 
     public function toggle(Habit $habit)
     {
-        if($habit->user_id != Auth::user()->id){
-            abort( code: 403, message:"sai pra lá o pangaré");
-        }
+        $this->authorize('toggle', $habit);
 
         $today = Carbon::today()->toDateString();
 

@@ -6,9 +6,6 @@
     </main>
 
     @auth
-        <p>
-            Bem vindo(a) {{ auth()->user()->name }}!
-            @dd(auth()->user())
-        </p>
+        <meta http-equiv="refresh" content="url={{ route('habits.index') }}">
     @endauth
 </x-layout>
