@@ -1,27 +1,36 @@
 <header class="bg-white border-bottom border-b-2 flex items-center justify-between p-4">
     {{-- LOGO --}}
-    <div>
-        logo
-    </div>
+
+    <a href="{{ route('habits.index') }}" class="habit-btn habit-shadow-lg px-2 py-1 bg-habit-orange">
+        HT
+    </a>
 
     {{-- GITHUB --}}
     <div>
-        github
-
         @auth
-        <form class='inline' action="{{ route(name: 'auth.logout') }}" method="POST">
+        <form 
+            class='inline' 
+            action="{{ route(name: 'auth.logout') }}" 
+            method="POST"
+        >
             @csrf
 
-            <button type="submit" class="bg-white p-2 border-2">
+            <button type="submit" class="p-2 habit-shadow-lg bg-habit-white habit-btn">
                 Sair
             <button>
         </form>
         @endauth
 
         @guest
-            <a href="{{ route('site.login') }}" class="bg-white p-2 border-2">
-                Login
-            </a>
+            <div class="flex gap-2">
+                <a href="{{ route('site.register') }}" class="p-2 habit-shadow-lg bg-habit-white habit-btn">
+                    Cadastrar
+                </a>
+
+                <a href="{{ route('site.login') }}" class="p-2 habit-shadow-lg bg-habit-orange habit-btn">
+                    Login
+                </a>
+            </div>
         @endguest
     </div>
 </header>
