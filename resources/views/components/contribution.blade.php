@@ -15,9 +15,6 @@
     <h2 class="font-bold text-lg">
       {{ $habit->name }}
     </h2>
-    <span class="text-sm text-gray-600 font-semibold">
-      {{ $selectedYear }}
-    </span>
   </div>
 
   {{-- GRID --}}

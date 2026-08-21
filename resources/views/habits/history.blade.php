@@ -4,7 +4,21 @@
         <x-navbar />
     
         <!-- HISTORICO -->
+
+        {{-- YEAR SELECTION --}}
         
+        <div class="my-4">
+            @foreach($avaliableYears as $y)
+                <a 
+                    href="{{ route('habits.history', $y) }}" 
+                    class="habit-btn habit-shadow-lg p-2 inline-block
+                    {{ $selectedYear == $y ? 'bg-habit-orange' : 'bg-white' }}"
+                >
+                    {{ $y }}
+                </a>
+            @endforeach
+        </div>
+
         @forelse($habits as $habit)
             <x-contribution :$habit :year="$selectedYear"/>
         @empty
